@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/*PROBLEM IS HERE, IF I COPY THE CONTENT OF TEST_TAILWIND GLOBAL.CSS
+I GET IT TO WORK. I MUST FIND WHAT IS WRONG HERE */
+
+
 * {
   margin: 0;
   padding: 0;
@@ -42,340 +46,1039 @@
   background: #7878a3;
 }
 
+
 @layer utilities {
+    
   .input-class {
-    @apply text-16 placeholder:text-16 rounded-lg border border-gray-300 text-gray-900 placeholder:text-gray-500;
+    font-size: 16px;
+    line-height: 24px;
+    border-radius: 0.5rem;
+    border-width: 1px;
+    border-color: #d1d5db;
+    color: #111827;
+  }
+  .input-class::placeholder {
+    font-size: 16px;
+    line-height: 24px;
+    color: #6b7280;
   }
 
   .sheet-content button {
-    @apply focus:ring-0 focus-visible:ring-transparent focus:ring-offset-0 focus-visible:ring-offset-0 focus-visible:outline-none focus-visible:border-none !important;
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  .sheet-content button:focus,
+  .sheet-content button:focus-visible {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
   }
 
   .text14_padding10 {
-    @apply text-14 px-4 py-2.5 font-semibold;
+    font-size: 14px;
+    line-height: 20px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    font-weight: 600;
   }
 
   .flex-center {
-    @apply flex items-center justify-center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .header-2 {
-    @apply text-18 font-semibold text-gray-900;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 600;
+    color: #111827;
   }
 
   .text-10 {
-    @apply text-[10px] leading-[14px];
+    font-size: 10px;
+    line-height: 14px;
   }
 
   .text-12 {
-    @apply text-[12px] leading-[16px];
+    font-size: 12px;
+    line-height: 16px;
   }
 
   .text-14 {
-    @apply text-[14px] leading-[20px];
+    font-size: 14px;
+    line-height: 20px;
   }
 
   .text-16 {
-    @apply text-[16px] leading-[24px];
+    font-size: 16px;
+    line-height: 24px;
   }
 
   .text-18 {
-    @apply text-[18px] leading-[22px];
+    font-size: 18px;
+    line-height: 22px;
   }
 
   .text-20 {
-    @apply text-[20px] leading-[24px];
+    font-size: 20px;
+    line-height: 24px;
   }
 
   .text-24 {
-    @apply text-[24px] leading-[30px];
+    font-size: 24px;
+    line-height: 30px;
   }
 
   .text-26 {
-    @apply text-[26px] leading-[32px];
+    font-size: 26px;
+    line-height: 32px;
   }
 
   .text-30 {
-    @apply text-[30px] leading-[38px];
+    font-size: 30px;
+    line-height: 38px;
   }
 
   .text-36 {
-    @apply text-[36px] leading-[44px];
+    font-size: 36px;
+    line-height: 44px;
   }
+
+  .text-bankGradient {
+    color: rgb(94, 150, 224); /* Replace with your actual gradient color */
+  }
+
+}
+
+@layer components {
+  .bg-bank-gradient {
+    display: flex;
+    align-items: center;        /* Vertical centering */
+    justify-content: center;    /* Horizontal centering */
+    height: 3rem;               /* Fixed height for consistent centering (equals Tailwind h-12) */
+    padding-left: 1.5rem;       /* Tailwind px-6 */
+    padding-right: 1.5rem;
+    padding-top: 0.75rem;       /* Tailwind py-3 */
+    padding-bottom: 0.75rem;
+    border-radius: 0.5rem;      /* Tailwind rounded-lg */
+    font-weight: 600;           /* Tailwind font-semibold */
+    font-size: 0.875rem;        /* Tailwind text-sm */
+    color: #fff;
+    background-color: #2563eb;  /* Tailwind bg-blue-600 */
+    transition-property: background-color, box-shadow;
+    transition-duration: 300ms;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 4px 6px -1px rgba(16,30,54,0.12), 0 2px 4px -2px rgba(16,30,54,0.08);
+    text-align: center;         /* Safety fallback */
+  }
+
+  .bg-bank-gradient:hover {
+    background-color: #1d4ed8;  /* Tailwind bg-blue-700 */
+    box-shadow: 0 10px 15px -3px rgba(16,30,54,0.15), 0 4px 6px -4px rgba(16,30,54,0.10);
+  }
+}
 
   /* Home */
+.home {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+}
+@media (max-width: 1280px) {
   .home {
-    @apply no-scrollbar flex w-full flex-row max-xl:max-h-screen max-xl:overflow-y-scroll;
+    max-height: 100vh;
+    overflow-y: scroll;
   }
+}
 
+.home.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.home.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+
+.home-content {
+  /* no-scrollbar */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.home-content::-webkit-scrollbar {
+  display: none;
+}
   .home-content {
-    @apply no-scrollbar flex w-full flex-1 flex-col gap-8 px-5 sm:px-8 py-7 lg:py-12 xl:max-h-screen xl:overflow-y-scroll;
+    display: flex;
+    width: 100%;
+    flex: 1 1 0%;
+    flex-direction: column;
+    gap: 2rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    padding-top: 1.75rem;
+    padding-bottom: 1.75rem;
+    max-height: none;
+    overflow-y: visible;
+  }
+  @media (min-width: 640px) {
+    .home-content {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .home-content {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+  }
+  @media (min-width: 1280px) {
+    .home-content {
+      max-height: 100vh;
+      overflow-y: scroll;
+    }
   }
 
   .home-header {
-    @apply flex flex-col justify-between gap-8;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
   }
 
   .total-balance {
-    @apply flex w-full items-center gap-4 rounded-xl border border-gray-200 p-4 shadow-chart sm:gap-6 sm:p-6;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 0.75rem;
+    border-width: 1px;
+    border-color: #e5e7eb;
+    padding: 1rem;
+    box-shadow: 0 2px 8px 0 rgba(16,30,54,0.08); /* example for shadow-chart */
+  }
+  @media (min-width: 640px) {
+    .total-balance {
+      gap: 1.5rem;
+      padding: 1.5rem;
+    }
   }
 
   .total-balance-chart {
-    @apply flex size-full max-w-[100px] items-center sm:max-w-[120px];
+    display: flex;
+    width: 100%;
+    max-width: 100px;
+    align-items: center;
+  }
+  @media (min-width: 640px) {
+    .total-balance-chart {
+      max-width: 120px;
+    }
   }
 
   .total-balance-label {
-    @apply text-14 font-medium text-gray-600;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+    color: #4b5563;
   }
 
   .total-balance-amount {
-    @apply text-24 lg:text-30 flex-1 font-semibold text-gray-900;
+    font-size: 24px;
+    line-height: 30px;
+    flex: 1 1 0%;
+    font-weight: 600;
+    color: #111827;
+  }
+  @media (min-width: 1024px) {
+    .total-balance-amount {
+      font-size: 30px;
+      line-height: 38px;
+    }
   }
 
   .recent-transactions {
-    @apply flex w-full flex-col gap-6;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+  .view-all-btn {
+    font-size: 14px;
+    line-height: 20px;
+    border-radius: 0.5rem;
+    border-width: 1px;
+    border-color: #d1d5db;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  .recent-transactions-label {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 600;
+  .recent-transactions-tablist {
+    margin-bottom: 2rem;
+    display: flex;
+    width: 100%;
+    flex-wrap: nowrap;
+    /* custom-scrollbar styles already defined elsewhere */
   }
+    .recent-transactions-label {
+      font-size: 24px;
+      line-height: 30px;
+    }
+  }
+    color: #374151;
+    border-style: solid;
+    background: transparent;
+  }
+}
 
   .view-all-btn {
-    @apply text-14 rounded-lg border border-gray-300 px-4 py-2.5 font-semibold text-gray-700;
+    font-size: 14px;
+    line-height: 20px;
+    border-radius: 0.5rem;
+    border-width: 1px;
+    border-color: #d1d5db;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    font-weight: 600;
+    color: #374151;
+    border-style: solid;
+    background: transparent;
   }
 
   .recent-transactions {
-    @apply flex w-full flex-col gap-6;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 1.5rem; /* gap-6 = 1.5rem */
   }
 
   .recent-transactions-label {
-    @apply text-20 md:text-24 font-semibold text-gray-900;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 600;
+    color: #111827;
+  }
+  @media (min-width: 768px) {
+    .recent-transactions-label {
+      font-size: 24px;
+      line-height: 30px;
+    }
   }
 
   .recent-transactions-tablist {
-    @apply custom-scrollbar mb-8 flex w-full flex-nowrap;
+    margin-bottom: 2rem; /* mb-8 = 2rem */
+    display: flex;
+    width: 100%;
+    flex-wrap: nowrap;
+    /* custom-scrollbar styles already defined elsewhere */
   }
 
   /* Right sidebar */
   .right-sidebar {
-    @apply no-scrollbar hidden h-screen max-h-screen flex-col border-l border-gray-200 xl:flex w-[355px] xl:overflow-y-scroll !important;
+    display: none;
+    height: 100vh;
+    max-height: 100vh;
+    flex-direction: column;
+    border-left: 1px solid #e5e7eb; /* border-gray-200 */
+    width: 355px;
+    overflow-y: scroll !important;
+    box-sizing: border-box;
+  }
+  @media (min-width: 1280px) {
+    .right-sidebar {
+      display: flex;
+    }
+  }
+  .right-sidebar.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .right-sidebar.no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 
   .profile-banner {
-    @apply h-[120px] w-full bg-gradient-mesh bg-cover bg-no-repeat;
+    height: 120px;
+    width: 100%;
+    background-image: var(--tw-gradient-mesh, none); /* Replace with actual gradient if needed */
+    background-size: cover;
+    background-repeat: no-repeat;
   }
 
   .profile {
-    @apply relative flex px-6 max-xl:justify-center;
+    position: relative;
+    display: flex;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    /* max-xl:justify-center is a Tailwind responsive utility; you may need to add a media query for <=1280px */
   }
 
   .profile-img {
-    @apply flex-center absolute -top-8 size-24 rounded-full bg-gray-100 border-8 border-white p-2 shadow-profile;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -2rem;
+    width: 6rem;
+    height: 6rem;
+    border-radius: 9999px;
+    background-color: #f3f4f6; /* bg-gray-100 */
+    border-width: 8px;
+    border-color: #fff;
+    padding: 0.5rem;
+    /* shadow-profile: add your custom shadow here if needed */
+    box-shadow: 0 4px 24px 0 rgba(16,30,54,0.12); /* example shadow */
   }
 
   .profile-details {
-    @apply flex flex-col pt-24;
+    display: flex;
+    flex-direction: column;
+    padding-top: 6rem;
   }
 
   .profile-name {
-    @apply text-24 font-semibold text-gray-900;
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: 600;
+    color: #111827; /* text-gray-900 */
   }
 
   .profile-email {
-    @apply text-16 font-normal text-gray-600;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    color: #4b5563; /* text-gray-600 */
   }
 
   .banks {
-    @apply flex flex-col justify-between gap-8 px-6 py-8;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 
   /* My Banks */
   .my-banks {
-    @apply flex h-screen max-h-screen w-full flex-col gap-8 bg-gray-25 p-8 xl:py-12;
+    display: flex;
+    height: 100vh;
+    max-height: 100vh;
+    width: 100%;
+    flex-direction: column;
+    gap: 2rem; /* gap-8 = 2rem */
+    background-color: #f8fafc; /* bg-gray-25, adjust if your palette differs */
+    padding: 2rem; /* p-8 = 2rem */
+  }
+  @media (min-width: 1280px) {
+    .my-banks {
+      padding-top: 3rem; /* xl:py-12 = 3rem */
+      padding-bottom: 3rem;
+    }
   }
 
   /* My Banks */
   .transactions {
-    @apply flex max-h-screen w-full flex-col gap-8 overflow-y-scroll bg-gray-25 p-8 xl:py-12;
+    display: flex;
+    max-height: 100vh;
+    width: 100%;
+    flex-direction: column;
+    gap: 2rem; /* gap-8 = 2rem */
+    overflow-y: scroll;
+    background-color: #f8fafc; /* bg-gray-25 */
+    padding: 2rem; /* p-8 = 2rem */
+  }
+  @media (min-width: 1280px) {
+    .transactions {
+      padding-top: 3rem; /* xl:py-12 = 3rem */
+      padding-bottom: 3rem;
+    }
   }
 
   .transactions-header {
-    @apply flex w-full flex-col items-start justify-between gap-8 md:flex-row;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  @media (min-width: 768px) {
+    .transactions-header {
+      flex-direction: row;
+    }
   }
 
   .transactions-account {
-    @apply flex flex-col justify-between gap-4 rounded-lg border-y bg-blue-600 px-4 py-5 md:flex-row;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-color: #2563eb; /* blue-600 */
+    border-radius: 0.5rem;
+    background-color: #2563eb; /* blue-600 */
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .transactions-account {
+      flex-direction: row;
+    }
   }
 
   .transactions-account-balance {
-    @apply flex-center flex-col  gap-2 rounded-md bg-blue-25/20 px-4 py-2 text-white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-radius: 0.375rem;
+    background-color: rgba(219, 234, 254, 0.2); /* blue-25/20 */
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    color: #fff;
   }
 
   .header-box {
-    @apply flex flex-col gap-1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
   }
 
   .header-box-title {
-    @apply text-24 lg:text-30 font-semibold text-gray-900;
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: 600;
+    color: #111827;
+  }
+  @media (min-width: 1024px) {
+    .header-box-title {
+      font-size: 30px;
+      line-height: 38px;
+    }
   }
 
   .header-box-subtext {
-    @apply text-14 lg:text-16 font-normal text-gray-600;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    color: #4b5563;
+  }
+  @media (min-width: 1024px) {
+    .header-box-subtext {
+      font-size: 16px;
+      line-height: 24px;
+    }
   }
 
   /* Bank Card */
   .bank-card {
-    @apply relative flex h-[190px] w-full max-w-[320px] justify-between rounded-[20px] border border-white bg-bank-gradient shadow-creditCard backdrop-blur-[6px];
+    position: relative;
+    display: flex;
+    height: 190px;
+    width: 100%;
+    max-width: 320px;
+    justify-content: space-between;
+    border-radius: 20px;
+    border: 1px solid #fff;
+    background: var(--bank-gradient, #e0e7ff); /* fallback color */
+    box-shadow: 0 4px 24px 0 rgba(16,30,54,0.12);
+    backdrop-filter: blur(6px);
   }
 
   .bank-card_content {
-    @apply relative z-10 flex size-full max-w-[228px] flex-col justify-between rounded-l-[20px] bg-gray-700 bg-bank-gradient px-5 pb-4 pt-5;
+    position: relative;
+    z-index: 10;
+    display: flex;
+    width: 100%;
+    max-width: 228px;
+    flex-direction: column;
+    justify-content: space-between;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: #374151;
+    background: var(--bank-gradient, #e0e7ff);
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    padding-bottom: 1rem;
+    padding-top: 1.25rem;
   }
 
   .bank-card_icon {
-    @apply flex size-full flex-1 flex-col items-end justify-between rounded-r-[20px] bg-bank-gradient bg-cover bg-center bg-no-repeat py-5 pr-5;
+    display: flex;
+    width: 100%;
+    flex: 1 1 0%;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background: var(--bank-gradient, #e0e7ff);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    padding-right: 1.25rem;
   }
 
   /* Bank Info */
   .bank-info {
-    @apply gap-[18px] flex p-4 transition-all border bg-blue-25 border-transparent;
+    display: flex;
+    gap: 18px;
+    padding: 1rem;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+    background-color: #f1f5f9; /* blue-25 */
   }
 
   /* Category Badge */
   .category-badge {
-    @apply flex-center truncate w-fit gap-1 rounded-2xl border-[1.5px] py-[2px] pl-1.5 pr-2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    width: fit-content;
+    gap: 0.25rem;
+    border-radius: 1rem;
+    border-width: 1.5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 0.375rem;
+    padding-right: 0.5rem;
   }
 
   .banktab-item {
-    @apply gap-[18px] border-b-2 flex px-2 sm:px-4 py-2 transition-all;
+    display: flex;
+    gap: 18px;
+    border-bottom-width: 2px;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    transition: all 0.2s;
+  }
+  @media (min-width: 640px) {
+    .banktab-item {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
   }
 
   /* Mobile nav */
   .mobilenav-sheet {
-    @apply flex h-[calc(100vh-72px)] flex-col justify-between overflow-y-auto;
+    display: flex;
+    height: calc(100vh - 72px);
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
   }
 
   .mobilenav-sheet_close {
-    @apply flex gap-3 items-center p-4 rounded-lg w-full max-w-60;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    max-width: 15rem;
   }
 
   /* PlaidLink */
   .plaidlink-primary {
-    @apply text-16 rounded-lg border border-bankGradient bg-bank-gradient font-semibold text-white shadow-form;
+    font-size: 16px;
+    border-radius: 0.5rem;
+    border: 1px solid var(--bank-gradient, #e0e7ff);
+    background: var(--bank-gradient, #e0e7ff);
+    font-weight: 600;
+    color: #fff;
+    box-shadow: 0 2px 8px 0 rgba(16,30,54,0.08);
   }
 
   .plaidlink-ghost {
-    @apply flex cursor-pointer items-center justify-center gap-3 rounded-lg px-3 py-7 hover:bg-white lg:justify-start;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    border-radius: 0.5rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-top: 1.75rem;
+    padding-bottom: 1.75rem;
+    transition: background 0.2s;
+  }
+  .plaidlink-ghost:hover {
+    background: #fff;
+  }
+  @media (min-width: 1024px) {
+    .plaidlink-ghost {
+      justify-content: flex-start;
+    }
   }
 
   .plaidlink-default {
-    @apply flex !justify-start cursor-pointer gap-3 rounded-lg !bg-transparent flex-row;
+    display: flex;
+    justify-content: flex-start !important;
+    cursor: pointer;
+    gap: 0.75rem;
+    border-radius: 0.5rem;
+    background: transparent !important;
+    flex-direction: row;
   }
 
   /* Auth */
   .auth-asset {
-    @apply flex h-screen w-full sticky top-0 items-center justify-end bg-sky-1 max-lg:hidden;
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    align-items: center;
+    justify-content: flex-end;
+    background-color: #f0f9ff; /* sky-1 */
+  }
+  @media (max-width: 1023px) {
+    .auth-asset {
+      display: none;
+    }
   }
 
   /* Auth Form */
   .auth-form {
-    @apply flex min-h-screen w-full max-w-[420px] flex-col justify-center gap-5 py-10 md:gap-8;
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    max-width: 420px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+  @media (min-width: 768px) {
+    .auth-form {
+      gap: 2rem;
+    }
   }
 
   .form-item {
-    @apply flex flex-col gap-1.5;
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
   }
 
   .form-label {
-    @apply text-14 w-full max-w-[280px] font-medium text-gray-700;
+    font-size: 14px;
+    width: 100%;
+    max-width: 280px;
+    font-weight: 500;
+    color: #374151;
   }
 
   .form-message {
-    @apply text-12 text-red-500;
+    font-size: 12px;
+    color: #ef4444;
   }
 
   .form-btn {
-    @apply text-16 rounded-lg border border-bankGradient bg-bank-gradient font-semibold text-white shadow-form;
+    font-size: 16px;
+    border-radius: 0.5rem;
+    border: 1px solid var(--bank-gradient, #e0e7ff);
+    background: var(--bank-gradient, #e0e7ff);
+    font-weight: 600;
+    color: #fff;
+    box-shadow: 0 2px 8px 0 rgba(16,30,54,0.08);
   }
 
   .form-link {
-    @apply text-14 cursor-pointer font-medium text-bankGradient;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--bank-gradient, #e0e7ff);
   }
 
   /* Payment Transfer */
   .payment-transfer {
-    @apply no-scrollbar flex flex-col overflow-y-scroll bg-gray-25 p-8 md:max-h-screen xl:py-12;
+    overflow-y: scroll;
+    background-color: #f8fafc;
+    padding: 2rem;
+    max-height: 100vh;
+    border-radius: 0.5rem;
+  }
+  @media (min-width: 1280px) {
+    .payment-transfer {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
   }
 
   .payment-transfer_form-item {
-    @apply flex w-full max-w-[850px] flex-col gap-3 md:flex-row lg:gap-8;
+    display: flex;
+    width: 100%;
+    max-width: 850px;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  @media (min-width: 768px) {
+    .payment-transfer_form-item {
+      flex-direction: row;
+    }
+  }
+  @media (min-width: 1024px) {
+    .payment-transfer_form-item {
+      gap: 2rem;
+    }
   }
 
   .payment-transfer_form-content {
-    @apply flex w-full max-w-[280px] flex-col gap-2;
+    display: flex;
+    width: 100%;
+    max-width: 280px;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   .payment-transfer_form-details {
-    @apply flex flex-col gap-1 border-t border-gray-200 pb-5 pt-6;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    border-top: 1px solid #e5e7eb;
+    padding-bottom: 1.25rem;
+    padding-top: 1.5rem;
   }
 
   .payment-transfer_btn-box {
-    @apply mt-5 flex w-full max-w-[850px] gap-3 border-gray-200 py-5;
+    margin-top: 1.25rem;
+    display: flex;
+    width: 100%;
+    max-width: 850px;
+    gap: 0.75rem;
+    border-color: #e5e7eb;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
   }
 
   .payment-transfer_btn {
-    @apply text-14 w-full bg-bank-gradient font-semibold text-white shadow-form !important;
+    font-size: 14px;
+    width: 100%;
+    background: var(--bank-gradient, #e0e7ff);
+    font-weight: 600;
+    color: #fff;
+    box-shadow: 0 2px 8px 0 rgba(16,30,54,0.08);
   }
 
   /* Root Layout */
   .root-layout {
-    @apply flex h-16 items-center justify-between p-5 shadow-creditCard sm:p-8 md:hidden;
+    display: flex;
+    height: 4rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem;
+    box-shadow: 0 4px 24px 0 rgba(16,30,54,0.12);
+  }
+  @media (min-width: 640px) {
+    .root-layout {
+      padding: 2rem;
+    }
+  }
+  @media (min-width: 768px) {
+    .root-layout {
+      display: none;
+    }
   }
 
   /* Bank Info */
   .bank-info_content {
-    @apply flex flex-1 items-center justify-between gap-2 overflow-hidden;
+    display: flex;
+    flex: 1 1 0%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    overflow: hidden;
   }
 
   /* Footer */
   .footer {
-    @apply flex cursor-pointer items-center justify-between gap-2 py-6;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
   }
 
   .footer_name {
-    @apply flex size-10 items-center justify-center rounded-full bg-gray-200 max-xl:hidden;
+    display: flex;
+    width: 2.5rem;
+    height: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background-color: #e5e7eb;
+  }
+  @media (max-width: 1279px) {
+    .footer_name {
+      display: none;
+    }
   }
 
   .footer_email {
-    @apply flex flex-1 flex-col justify-center max-xl:hidden;
+    display: flex;
+    flex: 1 1 0%;
+    flex-direction: column;
+    justify-content: center;
+  }
+  @media (max-width: 1279px) {
+    .footer_email {
+      display: none;
+    }
   }
 
   .footer_name-mobile {
-    @apply flex size-10 items-center justify-center rounded-full bg-gray-200;
+    display: flex;
+    width: 2.5rem;
+    height: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background-color: #e5e7eb;
   }
 
   .footer_email-mobile {
-    @apply flex flex-1 flex-col justify-center;
+    display: flex;
+    flex: 1 1 0%;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .footer_image {
-    @apply relative size-5 max-xl:w-full max-xl:flex max-xl:justify-center max-xl:items-center;
+    position: relative;
+    width: 1.25rem;
+    height: 1.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  @media (max-width: 1279px) {
+    .footer_image {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 
   .footer_image-mobile {
-    @apply relative size-5;
+    position: relative;
+    width: 1.25rem;
+    height: 1.25rem;
   }
 
   /* Sidebar */
   .sidebar {
-    @apply sticky left-0 top-0 flex h-screen w-fit flex-col  justify-between border-r border-gray-200 bg-white pt-8 text-white max-md:hidden sm:p-4 xl:p-6 2xl:w-[355px];
+    position: sticky;
+    left: 0;
+    top: 0;
+    display: flex;
+    height: 100vh;
+    width: fit-content;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid #e5e7eb;
+    background-color: #fff;
+    padding-top: 2rem;
+    color: #fff;
+  }
+  @media (max-width: 767px) {
+    .sidebar {
+      display: none;
+    }
+  }
+  @media (min-width: 640px) {
+    .sidebar {
+      padding: 1rem;
+    }
+  }
+  @media (min-width: 1280px) {
+    .sidebar {
+      padding: 1.5rem;
+    }
+  }
+  @media (min-width: 1536px) {
+    .sidebar {
+      width: 355px;
+    }
   }
 
   .sidebar-logo {
-    @apply 2xl:text-26 font-ibm-plex-serif text-[26px] font-bold text-black-1 max-xl:hidden;
+    font-family: 'IBM Plex Serif', serif;
+    font-size: 26px;
+    font-weight: bold;
+    color: #111827;
+  }
+  @media (max-width: 1279px) {
+    .sidebar-logo {
+      display: none;
+    }
+  }
+  @media (min-width: 1536px) {
+    .sidebar-logo {
+      font-size: 26px;
+    }
   }
 
   .sidebar-link {
-    @apply flex gap-3 items-center py-1 md:p-3 2xl:p-4 rounded-lg justify-center xl:justify-start;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    border-radius: 0.5rem;
+    justify-content: center;
+  }
+  @media (min-width: 1280px) {
+    .sidebar-link {
+      justify-content: flex-start;
+    }
+  }
+  @media (min-width: 640px) {
+    .sidebar-link {
+      padding: 1rem;
+    }
+  }
+  @media (min-width: 1536px) {
+    .sidebar-link {
+      padding: 1rem;
+    }
   }
 
   .sidebar-label {
-    @apply text-16 font-semibold text-black-2 max-xl:hidden;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f2937;
   }
-}
+  @media (max-width: 1279px) {
+    .sidebar-label {
+      display: none;
+    }
+  }
