@@ -4,6 +4,7 @@ import React from 'react';
 import "../globals.css";
 import Sidebar from "@/components/Sidebar";
 import Image from "next/image";
+import MobileNav from "@/components/MobileNav";
 
 
 export default function RootLayout({
@@ -22,15 +23,15 @@ export default function RootLayout({
             <Image src="icons/logo.svg"
             width={30}
             height={30}
-            alt = "menu icon"
+            alt = "logo"
             />
             <div>
-              MOBILE NAV BAR
+              <MobileNav user={loggedIn} />
             </div>
           </div>
+          {children}
         </div>
 
-        {children}
     </main>
   );
 }
