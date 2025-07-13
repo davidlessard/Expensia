@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter, IBM_Plex_Serif } from "next/font/google";
 import React from 'react';
 import "../globals.css";
+import Image from "next/image";
 
 export default function RootLayout({
   children,
@@ -9,8 +10,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main>
+    <main className="flex min-h-screen w-full justify-between font-inter">
         {children}
+        <div className="auth-asset">
+          <div>
+            <Image 
+              src="icons/auth-image.svg"
+              alt="Auth image"
+              width={500}
+              height={500}
+            />
+          </div>
+        </div>
     </main>
   );
 }

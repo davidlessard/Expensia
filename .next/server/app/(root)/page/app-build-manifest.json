@@ -2,21 +2,28 @@
   "pages": {
     "/(root)/page": [
       "static/chunks/[root-of-the-server]__7224e433._.css",
-      "static/chunks/node_modules_next_dist_1a6ee436._.js",
-      "static/chunks/app_layout_tsx_c0237562._.js",
-      "static/chunks/node_modules_c6189635._.js",
-      "static/chunks/_912718a1._.js",
-      "static/chunks/app_(root)_layout_tsx_01f647c3._.js",
+      "static/chunks/node_modules_next_dist_6284f7f1._.js",
+      "static/chunks/app_layout_tsx_a0bca82c._.js",
+      "static/chunks/node_modules_2d6b2e09._.js",
+      "static/chunks/_bf8d8bb0._.js",
+      "static/chunks/app_(root)_layout_tsx_f24a0bc6._.js",
       "static/chunks/node_modules_a7694303._.js",
       "static/chunks/components_5e0925bd._.js",
-      "static/chunks/app_(root)_page_tsx_463073a2._.js",
-      "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_fd44f5a4._.js",
-      "static/chunks/node_modules_next_dist_compiled_2ce9398a._.js",
-      "static/chunks/node_modules_next_dist_client_8f19e6fb._.js",
-      "static/chunks/node_modules_next_dist_2ecbf5fa._.js",
-      "static/chunks/node_modules_@swc_helpers_cjs_00636ac3._.js",
+      "static/chunks/app_(root)_page_tsx_f9eb4529._.js",
+      "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_4edd7ed9._.js",
+      "static/chunks/node_modules_next_dist_compiled_dae1c9ab._.js",
+      "static/chunks/node_modules_next_dist_client_b1e29c8f._.js",
+      "static/chunks/node_modules_next_dist_shared_lib_4b0cf7fc._.js",
+      "static/chunks/node_modules_next_dist_eb2b6a21._.js",
+      "static/chunks/node_modules_next_router_7ab374bf.js",
+      "static/chunks/node_modules_@sentry_core_build_esm_91422610._.js",
+      "static/chunks/node_modules_@sentry_browser_build_npm_esm_68108085._.js",
+      "static/chunks/node_modules_@sentry-internal_browser-utils_build_esm_bd5e1f77._.js",
+      "static/chunks/node_modules_@sentry-internal_replay_build_npm_esm_index_59148d8f.js",
+      "static/chunks/node_modules_af36bef2._.js",
+      "static/chunks/instrumentation-client_ts_befa20e0._.js",
       "static/chunks/_e69f0d32._.js",
-      "static/chunks/_93808211._.js"
+      "static/chunks/_d71e259f._.js"
     ]
   }
 }

@@ -1,10 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/*PROBLEM IS HERE, IF I COPY THE CONTENT OF TEST_TAILWIND GLOBAL.CSS
-I GET IT TO WORK. I MUST FIND WHAT IS WRONG HERE */
-
-
 * {
   margin: 0;
   padding: 0;
@@ -45,112 +41,112 @@ I GET IT TO WORK. I MUST FIND WHAT IS WRONG HERE */
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #7878a3;
 }
+ 
+.input-class {
+  padding-left: 10;
+  font-size: 16px;
+  line-height: 24px;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  border-color: #d1d5db;
+  color: #111827;
+}
+.input-class::placeholder {
+  font-size: 16px;
+  line-height: 24px;
+  color: #6b7280;
+}
 
+.sheet-content button {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.sheet-content button:focus,
+.sheet-content button:focus-visible {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.text14_padding10 {
+  font-size: 14px;
+  line-height: 20px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-weight: 600;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-2 {
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.text-10 {
+  font-size: 10px;
+  line-height: 14px;
+}
+
+.text-12 {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.text-14 {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.text-16 {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.text-18 {
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.text-20 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.text-24 {
+  font-size: 24px;
+  line-height: 30px;
+}
+
+.text-26 {
+  font-size: 26px;
+  line-height: 32px;
+}
+
+.text-30 {
+  font-size: 30px;
+  line-height: 38px;
+}
+
+.text-36 {
+  font-size: 36px;
+  line-height: 44px;
+}
+
+.text-bankGradient {
+  color: rgb(94, 150, 224); /* Replace with your actual gradient color */
+}
 
 @layer utilities {
-    
-  .input-class {
-    font-size: 16px;
-    line-height: 24px;
-    border-radius: 0.5rem;
-    border-width: 1px;
-    border-color: #d1d5db;
-    color: #111827;
-  }
-  .input-class::placeholder {
-    font-size: 16px;
-    line-height: 24px;
-    color: #6b7280;
-  }
-
-  .sheet-content button {
-    outline: none !important;
-    border: none !important;
-    box-shadow: none !important;
-  }
-  .sheet-content button:focus,
-  .sheet-content button:focus-visible {
-    outline: none !important;
-    border: none !important;
-    box-shadow: none !important;
-  }
-
-  .text14_padding10 {
-    font-size: 14px;
-    line-height: 20px;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-top: 0.625rem;
-    padding-bottom: 0.625rem;
-    font-weight: 600;
-  }
-
-  .flex-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .header-2 {
-    font-size: 18px;
-    line-height: 22px;
-    font-weight: 600;
-    color: #111827;
-  }
-
-  .text-10 {
-    font-size: 10px;
-    line-height: 14px;
-  }
-
-  .text-12 {
-    font-size: 12px;
-    line-height: 16px;
-  }
-
-  .text-14 {
-    font-size: 14px;
-    line-height: 20px;
-  }
-
-  .text-16 {
-    font-size: 16px;
-    line-height: 24px;
-  }
-
-  .text-18 {
-    font-size: 18px;
-    line-height: 22px;
-  }
-
-  .text-20 {
-    font-size: 20px;
-    line-height: 24px;
-  }
-
-  .text-24 {
-    font-size: 24px;
-    line-height: 30px;
-  }
-
-  .text-26 {
-    font-size: 26px;
-    line-height: 32px;
-  }
-
-  .text-30 {
-    font-size: 30px;
-    line-height: 38px;
-  }
-
-  .text-36 {
-    font-size: 36px;
-    line-height: 44px;
-  }
-
-  .text-bankGradient {
-    color: rgb(94, 150, 224); /* Replace with your actual gradient color */
-  }
 
 }
 
@@ -787,7 +783,8 @@ I GET IT TO WORK. I MUST FIND WHAT IS WRONG HERE */
 .form-item {
   display: flex;
   flex-direction: column;
-  gap: 0.375rem;
+  gap: 4;
+  margin-bottom: 15;
 }
 
 .form-label {
@@ -799,6 +796,7 @@ I GET IT TO WORK. I MUST FIND WHAT IS WRONG HERE */
 }
 
 .form-message {
+  margin-top: 2;
   font-size: 12px;
   color: #ef4444;
 }

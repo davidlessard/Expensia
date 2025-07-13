@@ -34,3 +34,24 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Notes for David
+
+React
+    Not sure what it is. Seems to add a lot of shortcut when programming in javascript/typescript.
+
+Nextjs
+    Not sure what it is.
+
+tailwind css
+    is a package that allows built-in functions to do the className of html elements (used with React)
+
+shadcn 
+    is a package that comes with built-in tools, that are customizable and that are made using tailwind.
+
+zod
+    is a library for validation, to ensure data has the correct shape.
+
+
+
+
