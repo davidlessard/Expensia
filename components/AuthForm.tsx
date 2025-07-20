@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import React, { useState } from 'react'
 import Image from "next/image";
+import PlaidLink from './PlaidLink';
 
 import {z} from "zod"
 import {zodResolver} from "@hookform/resolvers/zod"
@@ -36,8 +37,9 @@ const AuthForm = ({ type }:{ type: string }) => {
       lastName: "",
       email: "",
       password: "",
-      adress1: "",
-      province: "",
+      address1: "",
+      city: "",
+      state: "",
       postalCode: "",
       dateOfBirth: "",
       ssn: ""
@@ -53,8 +55,22 @@ const AuthForm = ({ type }:{ type: string }) => {
         try {
             // Sign up with Appwrite & create plain token
 
+            
+
             if(type === "sign-up"){
-                const newUser = await signUp(data);
+                const userData = {
+                firstName: data.firstName!,
+                lastName: data.lastName!,
+                email: data.email,
+                password: data.password,
+                address1: data.address1!,
+                city: data.city!,
+                state: data.state!,
+                postalCode: data.postalCode!,
+                dateOfBirth: data.dateOfBirth!,
+                ssn: data.ssn!
+            }
+                const newUser = await signUp(userData);
 
                 setUser(newUser);
             }
@@ -109,11 +125,11 @@ const AuthForm = ({ type }:{ type: string }) => {
                 </h1>
             </div>
         </header>
-        {user ? (
+        {user ? ( 
             <div className="flex flex-col gap-4">
-                {/*PlaidLink*/}
+                <PlaidLink user={user} variant="primary"/>
             </div>
-        ): (
+         ): (
             <>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -126,12 +142,12 @@ const AuthForm = ({ type }:{ type: string }) => {
                                         control={form.control} name="lastName" label="Last Name" placeholder="Enter your last name"/>
                                 </div>
                                 <CustomInput 
-                                    control={form.control} name="adress1" label="Adress" placeholder="Enter your street adress"/>
+                                    control={form.control} name="address1" label="Adress" placeholder="Enter your street adress"/>
                                 <CustomInput 
                                     control={form.control} name="city" label="City" placeholder="Enter your city"/>
                                 <div className="flex gap-4">
                                     <CustomInput 
-                                        control={form.control} name="province" label="Province" placeholder="Example: QC"/>
+                                        control={form.control} name="state" label="Province" placeholder="Example: QC"/>
                                     <CustomInput 
                                         control={form.control} name="postalCode" label="Postal Code" placeholder="Example: A1B 2C3"/>
                                 </div>
@@ -179,7 +195,7 @@ const AuthForm = ({ type }:{ type: string }) => {
 
                 </footer>
             </>
-        )}
+        )} 
     </section>
   )
 }
