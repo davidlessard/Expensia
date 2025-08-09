@@ -55,8 +55,6 @@ const AuthForm = ({ type }:{ type: string }) => {
         try {
             // Sign up with Appwrite & create plain token
 
-            
-
             if(type === "sign-up"){
                 const userData = {
                 firstName: data.firstName!,

@@ -5,21 +5,30 @@ import { Chart, Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const DoughnutChart = ({accounts}:DoughnutChartProps) => {
+const DoughnutChart = ({ accounts }: DoughnutChartProps) => {
+    if (!Array.isArray(accounts) || accounts.length === 0) {
+    return <p className="text-center text-sm text-gray-400">No data to display</p>;
+  }
+  
+  const accountNames = accounts.map((a) => a.name);  // we get each individual accounts, and for each one we get the name
+  const balances = accounts.map((a) => a.currentBalance) // we get each individual account, and for each one we get the balance
+
   const data = {
     datasets: [
         {
            label: 'Banks',
-           data : [1250, 2500, 3750],
+           data : balances,
            backgroundColor: ['#0747b6', '#2265d8', '#2f91fa']
         }
     ],
-    labels: ['Bank 1', 'Bank 2', 'Bank 3']
+    labels: accountNames
   }
   
   return <Doughnut 
     data={data}
     options={{
+        responsive: true,
+        maintainAspectRatio: false,
         cutout: '60%',
         plugins : {
             legend: {
