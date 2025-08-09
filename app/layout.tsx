@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'; // This layout is dynamic and should not be cached by Next.js
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter, IBM_Plex_Serif } from "next/font/google";
 import "./globals.css";
