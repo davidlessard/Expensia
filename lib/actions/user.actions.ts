@@ -149,9 +149,9 @@ export const createLinkToken = async (user: User) => {
                 client_user_id: user.$id
             },
             client_name: `${user.firstName} ${user.lastName}`,
-            products: ["transactions"] as Products[],//["auth", "transactions", "identity"] as Products[], // products: ["auth"] as Products[] for sandbox
-            language: "en",
-            country_codes: ["US"] as CountryCode[], // , "CA"// "US" for sandbox
+            products: [process.env.PLAID_PRODUCTS] as Products[],//["auth", "transactions", "identity"] as Products[], // products: ["auth"] as Products[] for sandbox
+            language: "fr",
+            country_codes: [process.env.PLAID_COUNTRY_CODES] as CountryCode[], // , "CA"// "US" for sandbox
         }
         console.log("TokenParams are the following : ", tokenParams)
         const response = await plaidClient.linkTokenCreate(tokenParams);
