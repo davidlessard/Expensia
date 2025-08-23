@@ -7,7 +7,7 @@ import { encryptId, extractCustomerIdFromUrl, parseStringify } from "../utils";
 import { CountryCode, ProcessorTokenCreateRequest, ProcessorTokenCreateRequestProcessorEnum, Products } from "plaid";
 import { plaidClient } from "@/lib/plaid";
 import { revalidatePath } from "next/cache";
-import { addFundingSource, createDwollaCustomer } from "./dwolla.actions";
+//import { addFundingSource, createDwollaCustomer } from "./dwolla.actions";
 
 const {
     APPWRITE_DATABASE_ID: DATABASE_ID,
@@ -69,14 +69,15 @@ export const signUp = async ({password, ...userData}:SignUpParams) => {
 
         if(!newUserAccount) throw Error("Error creating user");
 
-        const dwollaCustomerUrl = await createDwollaCustomer({
-            ...userData,
-            type: "personal",
-        })
+        // DELETE DWOLLA
+        // const dwollaCustomerUrl = await createDwollaCustomer({
+        //     ...userData,
+        //     type: "personal",
+        // })
 
-        if(!dwollaCustomerUrl) throw Error("Error creating Dwolla customer");
+        // if(!dwollaCustomerUrl) throw Error("Error creating Dwolla customer");
 
-        const dwollaCustomerId = extractCustomerIdFromUrl(dwollaCustomerUrl);
+        // const dwollaCustomerId = extractCustomerIdFromUrl(dwollaCustomerUrl);
 
         const newUser = await database.createDocument(
             DATABASE_ID!,
@@ -84,9 +85,7 @@ export const signUp = async ({password, ...userData}:SignUpParams) => {
             ID.unique(),
             {
                 userId: newUserAccount.$id,
-                ...userData,
-                dwollaCustomerId,
-                dwollaCustomerUrl
+                ...userData
             }
         )
 
@@ -105,7 +104,6 @@ export const signUp = async ({password, ...userData}:SignUpParams) => {
             bankId: "temp-bank-id", // If you don't have Plaid yet, use placeholder
             accountId: "temp-account-id",
             accessToken: "temp-access-token",
-            fundingSourceUrl: "temp-url",
             sharableId: "temp-sharable-id",
             });
         // ADDED BY CHATGPT ^^
@@ -151,16 +149,20 @@ export const createLinkToken = async (user: User) => {
                 client_user_id: user.$id
             },
             client_name: `${user.firstName} ${user.lastName}`,
-            products: ["auth"] as Products[],
+            products: ["transactions"] as Products[],//["auth", "transactions", "identity"] as Products[], // products: ["auth"] as Products[] for sandbox
             language: "en",
-            country_codes: ["US"] as CountryCode[],
+            country_codes: ["US"] as CountryCode[], // , "CA"// "US" for sandbox
         }
-
+        console.log("TokenParams are the following : ", tokenParams)
         const response = await plaidClient.linkTokenCreate(tokenParams);
         return parseStringify({ linkToken: response.data.link_token });
  
     } catch (error) {
         console.error("Error creating link token:", error);
+        if (typeof error === "object" && error !== null && "response" in error) {
+            // @ts-ignore
+            console.error("Error response :", (error as any).response?.data);
+        }
     }
 }
 
@@ -169,7 +171,6 @@ export const createBankAccount = async ({
     bankId,
     accountId,
     accessToken,
-    fundingSourceUrl,
     sharableId,
 }:createBankAccountProps) => {
     // we are trying to create a bank account in our Appwrite database 
@@ -184,7 +185,6 @@ export const createBankAccount = async ({
                 bankId,
                 accountId,
                 accessToken,
-                fundingSourceUrl,
                 sharableId,
             },
         )
@@ -215,25 +215,28 @@ export const exchangePublicToken = async ({ publicToken, user, }: exchangePublic
         // Create a processor token for Dwolla using the access token and account ID
         console.log("accessToken", accessToken);
         console.log("account_id", accountData.account_id);
-        console.log("processor", "dwolla" as ProcessorTokenCreateRequestProcessorEnum);
-        const request: ProcessorTokenCreateRequest = {
-            access_token: accessToken,
-            account_id: accountData.account_id,
-            processor: "dwolla" as ProcessorTokenCreateRequestProcessorEnum,
-        };
 
-        const processorTokenResponse = await plaidClient.processorTokenCreate(request);
-        const processorToken = processorTokenResponse.data.processor_token;
+        // DELETE DWOLLA
+        //console.log("processor", "dwolla" as ProcessorTokenCreateRequestProcessorEnum);
+        // const request: ProcessorTokenCreateRequest = {
+        //     access_token: accessToken,
+        //     account_id: accountData.account_id,
+        //     processor: "dwolla" as ProcessorTokenCreateRequestProcessorEnum,
+        // };
 
+        // const processorTokenResponse = await plaidClient.processorTokenCreate(request);
+        // const processorToken = processorTokenResponse.data.processor_token;
+
+        // DELETE DWOLLA
         //Create a funding (to send and recieve funds) source URL for the account using the Dwolla customer ID, processor token, and bank name
-        const fundingSourceUrl = await addFundingSource({
-            dwollaCustomerId: user.dwollaCustomerId,
-            processorToken,
-            bankName: accountData.name,
-        });
-
-        // If the funding source URL is not created, throw an error
-        if (!fundingSourceUrl) throw Error;
+        // const fundingSourceUrl = await addFundingSource({
+        //     dwollaCustomerId: user.dwollaCustomerId,
+        //     processorToken,
+        //     bankName: accountData.name,
+        // });
+        //
+        // // If the funding source URL is not created, throw an error
+        // if (!fundingSourceUrl) throw Error;
 
         //Create a bank account using the user ID, item ID, account ID, acces token, and funding source URL, and sharable ID
         await createBankAccount({
@@ -241,7 +244,6 @@ export const exchangePublicToken = async ({ publicToken, user, }: exchangePublic
             bankId: itemId,
             accountId: accountData.account_id,
             accessToken,
-            fundingSourceUrl,
             sharableId: encryptId(accountData.account_id),
         });
 
