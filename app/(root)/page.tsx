@@ -7,8 +7,6 @@ import { getLoggedInUser } from "@/lib/actions/user.actions";
 import { redirect } from "next/navigation";
 
 
-//const Home = async ({ searchParams: { id, page } }:SearchParamProps ) => { // COMPLAINS THAT """"Error: Route "/" used searchParams.id. searchParams should be awaited...""""
-
 const Home = async ({ searchParams }: { searchParams: { id?: string, page?: string } }) => { 
   // I had to change this to await searchParams because the error was saying that searchParams.id was not available and that I should await searchParams.
   const awaitedSearchParams = await searchParams;
@@ -22,9 +20,27 @@ const Home = async ({ searchParams }: { searchParams: { id?: string, page?: stri
   if (!accounts) return; // or redirect, or render "no accounts" UI
 
   const accountsData = accounts?.data;
-  const appwriteItemId = (id as string) || accountsData[0]?.appwriteItemId;
+
+    // Fetch ALL accounts with their transactions
+  const accountsWithTransactions = await Promise.all(
+    accountsData.map(async (acc: { appwriteItemId: any; }) => { //: { appwriteItemId: any; } added by copilot, look into it later
+      const account = await getAccount({ appwriteItemId: acc.appwriteItemId });
+      return account;
+    })
+  );
+
+  // Flatten transactions from all accounts
+  const allTransactions = accountsWithTransactions.flatMap(
+    (acc) => acc?.transactions || []
+  );
+
+  // const appwriteItemId = (id as string) || accountsData[0]?.appwriteItemId;
  
-  const account = await getAccount({ appwriteItemId });
+  // const account = await getAccount({ appwriteItemId });
+
+  console.log("transactions are the following : ", allTransactions);
+  // Keep track of selected account (if needed for UI)
+  const appwriteItemId = (id as string) || accountsData[0]?.appwriteItemId;
 
   return (
     <section className="home">
@@ -32,9 +48,9 @@ const Home = async ({ searchParams }: { searchParams: { id?: string, page?: stri
         <header className='home-header'>
           <HeaderBox 
             type="greeting"
-            title="Welcome"
+            title="Bienvenue"
             user={loggedIn?.firstName || "Guest"}
-            subtext="Access and manage your account and transactions efficiently."
+            subtext="Accédez à votre compte et gérez vos transactions efficacement."
           />
 
           <TotalBalanceBox 
@@ -43,10 +59,10 @@ const Home = async ({ searchParams }: { searchParams: { id?: string, page?: stri
             totalCurrentBalance={accounts?.totalCurrentBalance}
           />
         </header>
-
+        
         <RecentTransactions
           accounts={accountsData}
-          transactions={account?.transactions}
+          transactions={allTransactions}
           appwriteItemId={appwriteItemId}
           page={currentPage}
         />
@@ -55,7 +71,7 @@ const Home = async ({ searchParams }: { searchParams: { id?: string, page?: stri
 
       <RightSidebar 
         user={loggedIn}
-        transactions={account?.transactions}
+        transactions={allTransactions}
         banks={accountsData?.slice(0, 2)}
       />
     </section>

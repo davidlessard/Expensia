@@ -5,7 +5,6 @@ import { Geist, Geist_Mono, Inter, IBM_Plex_Serif } from "next/font/google";
 import "./globals.css";
 import React from 'react';
 
-
 const inter= Inter({ subsets: ["latin"], variable: "--font-inter" });
 const ibmPlexSerif = IBM_Plex_Serif({ subsets: ["latin"], variable: "--font-ibm-plex-serif", weight: ["400", "700"]});
 
@@ -20,10 +19,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Budget Tracker",
-  description: "Budget Tracker is a simple app to track your expenses and income automatically.",
+  title: "Expensia",
+  description: "Expensia is a simple app to track your expenses and income automatically.",
   icons :{
-    icon: '/icons/logo.svg'
+    icon: '/icons/expensia-logo.svg'
   }
 };
 
@@ -42,3 +41,4 @@ export default function RootLayout({
     </html>
   );
 }
+

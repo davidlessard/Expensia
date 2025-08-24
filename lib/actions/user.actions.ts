@@ -69,16 +69,6 @@ export const signUp = async ({password, ...userData}:SignUpParams) => {
 
         if(!newUserAccount) throw Error("Error creating user");
 
-        // DELETE DWOLLA
-        // const dwollaCustomerUrl = await createDwollaCustomer({
-        //     ...userData,
-        //     type: "personal",
-        // })
-
-        // if(!dwollaCustomerUrl) throw Error("Error creating Dwolla customer");
-
-        // const dwollaCustomerId = extractCustomerIdFromUrl(dwollaCustomerUrl);
-
         const newUser = await database.createDocument(
             DATABASE_ID!,
             USER_COLLECTION_ID!,
@@ -149,11 +139,11 @@ export const createLinkToken = async (user: User) => {
                 client_user_id: user.$id
             },
             client_name: `${user.firstName} ${user.lastName}`,
-            products: [process.env.PLAID_PRODUCTS] as Products[],//["auth", "transactions", "identity"] as Products[], // products: ["auth"] as Products[] for sandbox
+            products: [process.env.PLAID_PRODUCTS] as Products[],
             language: "fr",
-            country_codes: [process.env.PLAID_COUNTRY_CODES] as CountryCode[], // , "CA"// "US" for sandbox
+            country_codes: [process.env.PLAID_COUNTRY_CODES] as CountryCode[],
         }
-        console.log("TokenParams are the following : ", tokenParams)
+        //console.log("TokenParams are the following : ", tokenParams)
         const response = await plaidClient.linkTokenCreate(tokenParams);
         return parseStringify({ linkToken: response.data.link_token });
  
@@ -191,7 +181,7 @@ export const createBankAccount = async ({
 
         return parseStringify(bankAccount);
     } catch (error) {
-        
+        console.error("Error creating bank account:", error);
     }
 }
 
@@ -211,32 +201,6 @@ export const exchangePublicToken = async ({ publicToken, user, }: exchangePublic
         });
 
         const accountData = accountsResponse.data.accounts[0]; // Assuming you want the first account
-
-        // Create a processor token for Dwolla using the access token and account ID
-        console.log("accessToken", accessToken);
-        console.log("account_id", accountData.account_id);
-
-        // DELETE DWOLLA
-        //console.log("processor", "dwolla" as ProcessorTokenCreateRequestProcessorEnum);
-        // const request: ProcessorTokenCreateRequest = {
-        //     access_token: accessToken,
-        //     account_id: accountData.account_id,
-        //     processor: "dwolla" as ProcessorTokenCreateRequestProcessorEnum,
-        // };
-
-        // const processorTokenResponse = await plaidClient.processorTokenCreate(request);
-        // const processorToken = processorTokenResponse.data.processor_token;
-
-        // DELETE DWOLLA
-        //Create a funding (to send and recieve funds) source URL for the account using the Dwolla customer ID, processor token, and bank name
-        // const fundingSourceUrl = await addFundingSource({
-        //     dwollaCustomerId: user.dwollaCustomerId,
-        //     processorToken,
-        //     bankName: accountData.name,
-        // });
-        //
-        // // If the funding source URL is not created, throw an error
-        // if (!fundingSourceUrl) throw Error;
 
         //Create a bank account using the user ID, item ID, account ID, acces token, and funding source URL, and sharable ID
         await createBankAccount({

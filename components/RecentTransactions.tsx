@@ -26,10 +26,10 @@ const RecentTransactions = ({
     <section className="recent-transactions">
         <header className="flex items-center justify-between">
             <h2 className="recent-transactions-label">
-                Recent transactions
+                Transactions récentes
             </h2>
             <Link href={`/transaction-history/?id=${appwriteItemId}`} className="view-all-btn">
-                View all
+                Voir tout
             </Link>
         </header>
         <Tabs defaultValue={appwriteItemId} className="w-full">

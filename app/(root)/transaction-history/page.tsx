@@ -33,8 +33,8 @@ const TransactionHistory = async ({ searchParams }: { searchParams: { id?: strin
     <div className="transactions">
       <div className="transactions-header">
         <HeaderBox
-        title="Transaction History"
-        subtext="See your bank details and transactions."/>
+        title="Historique des transactions"
+        subtext="Suveiller vos transactions bancaires récentes."/>
       </div>
 
       <div className="space-y-6">
@@ -51,7 +51,7 @@ const TransactionHistory = async ({ searchParams }: { searchParams: { id?: strin
             </p>
           </div>
           <div className="transactions-account-balance">
-            <p className="text-14">Curent balance</p>
+            <p className="text-14">Balance actuelle</p>
             <p className="text-24 text-center text-semi-bold">
               {formatAmount(account?.data.currentBalance)}
             </p>
@@ -59,10 +59,9 @@ const TransactionHistory = async ({ searchParams }: { searchParams: { id?: strin
         </div>
 
         <section className="flex w-full flex-col gap-6">
-          Transactions Table {/* TO REMOVE (NOT IN SANDBOX)*/} 
-          {/* <TransactionsTable
-              transactions={currentTransactions} 
-              /> // TO ADD WHEN TRANSACTIONS ARE FUNCTIONAL (NOT IN SANDBOX)*/} 
+          <TransactionsTable
+            transactions={currentTransactions} 
+          /> 
 
           {totalPages > 1 && (
               <div className="my-4 w-full">

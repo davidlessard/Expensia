@@ -35,11 +35,11 @@ const TransactionsTable = ({ transactions }: TransactionTableProps) => {
         <TableHeader className="bg-[#f9fafb]">
             <TableRow>
             <TableHead className="px-2">Transactions</TableHead>
-            <TableHead className="px-2">Amount</TableHead>
-            <TableHead className="px-2">Status</TableHead>
+            <TableHead className="px-2">Montant</TableHead>
+            <TableHead className="px-2">Statut</TableHead>
             <TableHead className="px-2">Date</TableHead>
-            <TableHead className="px-2 max-md:hidden">Channel</TableHead>
-            <TableHead className="px-2 max-md:hidden">Category</TableHead>
+            <TableHead className="px-2 max-md:hidden">Chaîne</TableHead>
+            <TableHead className="px-2 max-md:hidden">Catégorie</TableHead>
 
             </TableRow>
         </TableHeader>

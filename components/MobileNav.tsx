@@ -15,6 +15,7 @@ import { sidebarLinks } from '@/constants';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import Footer from './Footer';
+import PlaidLink from "./PlaidLink";
 
 const MobileNav = ({ user }: MobileNavProps) => {
   const pathname = usePathname();
@@ -23,30 +24,38 @@ const MobileNav = ({ user }: MobileNavProps) => {
       <Sheet>
         <SheetTrigger>
           <Image 
-          src="/icons/hamburger.svg"
-          width={30}
-          height={30}
-          alt="menu"
-          className="cursor-pointer"
+            src="/icons/hamburger.svg"
+            width={30}
+            height={30}
+            alt="menu"
+            className="cursor-pointer"
           />
         </SheetTrigger>
-        <SheetContent side="left" className="border-none bg-white">
-          <Link href="/" className="cursor-pointer flex items-center gap-1 px-4">
+        <SheetContent side="left" className="bg-white border-l-8 border-white">
+          <SheetHeader>
+            <SheetTitle>
+              <Link href="/" className="cursor-pointer flex items-center gap-1 px-4">
                 <Image 
-                    src="/icons/logo.svg"
+                    src="/icons/expensia-logo.svg"
                     width={34}
                     height={34}
-                    alt="Budget Tracker logo"
+                    alt="Expensia logo"
                 />
                 <h1 className="text-26 font-ibm-plex-serif font-bold text-black-1">
-                    Budget Tracker
+                    Expensia
                 </h1>
-            </Link> 
+              </Link> 
+            </SheetTitle> {/* Titre accessible */}
+            <SheetDescription></SheetDescription>
+          </SheetHeader>
+
+          
             <div className="mobilenav-sheet">
               <SheetClose asChild>
-                <nav className ="flex h-full flex-col gap-6 pt-16 text-white-100">
+                <nav className ="flex h-full flex-col gap-6 pt-16 text-white">
                   {sidebarLinks.map((item) => {
                     const isActive = pathname === item.route || pathname.startsWith(`${item.route}/`);
+
                     return(
                       <SheetClose asChild key={item.route}>
                         <Link href={item.route} key={item.label} className={cn("mobilenav-sheet_close w-full", {"bg-bank-gradient":isActive})}
@@ -56,9 +65,9 @@ const MobileNav = ({ user }: MobileNavProps) => {
                               alt={item.label}
                               width={20}
                               height={20}
-                              className={cn({'brightness-[3] invert-[0]': isActive})} // Adjust brightness and invert based on active state
+                              className={cn({'brightness-[3] invert-0': isActive})} // Adjust brightness and invert based on active state
                           />
-                          <p className={cn("text-16 font-semibold text-black-2", {"text-white": isActive})}>
+                          <p className={cn("text-16 font-semibold text-black", {"text-white": isActive})}>
                               {item.label}
                           </p>
                         </Link>
@@ -67,15 +76,15 @@ const MobileNav = ({ user }: MobileNavProps) => {
                     )
                   })}
 
-                  USER
+                  <PlaidLink user={user}/>
                 </nav>
               </SheetClose>
-            </div>
-
+            
             <Footer user={user} type="mobile"/>
+          </div>
         </SheetContent>        
       </Sheet>
-</section>
+    </section>
   )
 }
 
